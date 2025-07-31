@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/output.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Cardapio-Hamburgueria</title>
+</head>
+
+<body>
+
+    <!--Inicio do header -->
+    <header class="w-full h-[480px]  bg-[url('/assets/bg.png')] bg-center bg-cover">
+        <div class="w-full h-full flex flex-col items-center justify-center">
+            <img src="./assets/hamburguer-Logo.png" alt="hamburguer"
+                class="w-32 h-32  shadow-ld hover:scale-110 duration-200">
+            <h1 class="text-3xl mt-4 mb-2 font-bold text-white">BIG BUGUER</h1>
+            <span class="text-white font-medium">Rua Carapicuria n 323, Campo Grande -SP</span>
+            <div class="bg-green-500 py-1 px-4 mt-3 rounded-sm" id="date-aberto">
+                <span class="text-white font-bold">Seg á Dom - 18:00 as 22:00</span>
+            </div>
+            <div class="bg-red-500 py-1 px-4 mt-3 rounded-sm text-center" id="date-fechado">
+                <span class="text-white font-bold"> Restaurante fechado<br>Horário é Seg á Dom - 18:00 as
+                    22:00</span>
+            </div>
+        </div>
+    </header>
+    <!--Fim do  Inicio -->
+
+    <div id="menu">
+
+
+        <h2 class="text-2xl md:text-3xl font-bold text-center mt-9 mb-6">Conheça nosso menu</h2>
+        <!--cardapio-->
+
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-7 md:gap-10 max-w-6xl mx-auto px-2 mb-16">
+            <!--Produto Item-->
+            <div class="flex gap-2 bg-gray-200 p-6 rounded-xl shadow-lg">
+                <img src="assets/hamb-1.png" alt="hamburguer-duplo"
+                    class="w-28 h-28 rounded-md hover:scale-105 hover:-rotate-2 duration-300 shadow-lg">
+
+                <div>
+                    <p class="font-bold">Hamburguer Duplo</p>
+                    <p class="text-sm">Pão levinho de fermetação natural da trigou, burder 160g, queijo prato e maionese
+                        da
+                        casa</p>
+                    <div class="flex items-center justify-between gap-2 mt-3">
+                        <p class="font-bold">R$ 18,90</p>
+                        <button class="bg-gray-900 py-2 px-3 rounded " id="add-to-btn" data-name="hamburguer Duplo"
+                            data-img="assets/hamb-1.png" data-price="18.90">
+                            <i class="fa fa-cart-plus text-lg text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--Fim Produto-->
+
+            <!--Produto Item-->
+            <div class="flex gap-2 bg-gray-200 p-6 rounded-xl shadow-lg">
+                <img src="assets/hamb-4.png" alt="hamburguer-duplo"
+                    class="w-28 h-28 rounded-md hover:scale-105 hover:-rotate-2 duration-300 shadow-lg">
+
+                <div>
+                    <p class="font-bold">Hamburguer Frango</p>
+                    <p class="text-sm">Pão levinho de fermetação natural da trigou, burder 160g, queijo prato e maionese
+                        da
+                        casa</p>
+                    <div class="flex items-center justify-between gap-2 mt-3">
+                        <p class="font-bold">R$ 32,90</p>
+                        <button class="bg-gray-900 py-2 px-3 rounded " id="add-to-btn" data-name="Hamburguer Frango"
+                            data-price="32.90">
+                            <i class="fa fa-cart-plus text-lg text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--Fim Produto-->
+            <!--Produto Item-->
+            <div class="flex gap-2 bg-gray-200 p-6 rounded-xl shadow-lg">
+                <img src="assets/hamb-2.png" alt="hamburguer-duplo"
+                    class="w-28 h-28 rounded-md hover:scale-105 hover:-rotate-2 duration-300 shadow-lg">
+
+                <div>
+                    <p class="font-bold">Hamburguer Salada</p>
+                    <p class="text-sm">Pão levinho de fermetação natural da trigou, burder 160g, queijo prato e maionese
+                        da
+                        casa</p>
+                    <div class="flex items-center justify-between gap-2 mt-3">
+                        <p class="font-bold">R$ 22,90</p>
+                        <button class="bg-gray-900 py-2 px-3 rounded" id="add-to-btn" data-name="Hamburguer Salada"
+                            data-price="22.90">
+                            <i class="fa fa-cart-plus text-lg text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--Fim Produto-->
+            <!--Produto Item-->
+            <div class="flex gap-2 bg-gray-200 p-6 rounded-xl shadow-lg">
+                <img src="assets/hamb-3.png" alt="hamburguer-duplo"
+                    class="w-28 h-28 rounded-md hover:scale-105 hover:-rotate-2 duration-300 shadow-lg">
+
+                <div>
+                    <p class="font-bold">Hamburguer da Casa</p>
+                    <p class="text-sm">Pão levinho de fermetação natural da trigou, burder 160g, queijo prato e maionese
+                        da
+                        casa</p>
+                    <div class="flex items-center justify-between gap-2 mt-3">
+                        <p class="font-bold">R$ 28,90</p>
+                        <button class="bg-gray-900 py-2 px-3 rounded" id="add-to-btn" data-name="hamburguer da Casa"
+                            data-price="28.90">
+                            <i class="fa fa-cart-plus text-lg text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--Fim Produto-->
+        </main>
+
+
+
+
+        <h2 class="text-2xl md:text-3xl font-bold text-center mt-9 mb-6">Menu de Bebidas</h2>
+        <!--Bebidas Menu-->
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-7 md:gap-10 max-w-6xl mx-auto px-2 mb-16">
+
+
+            <div class="flex gap-2 w-full bg-gray-200 p-6 rounded-xl shadow-lg">
+                <img src="assets/refri-1.png" alt="hamburguer-duplo"
+                    class="w-28 h-28 rounded-md hover:scale-105 hover:-rotate-2 duration-300 shadow-lg">
+
+                <div class="w-full">
+                    <p class="font-bold">Coca-Cola 350ml</p>
+
+                    <div class="flex items-center justify-between gap-2 mt-3">
+                        <p class="font-bold">R$ 5,90</p>
+                        <button class="bg-gray-900 py-2 px-3 rounded " id="add-to-btn" data-name="Coca-Cola 350ml"
+                            data-price="5.90">
+                            <i class="fa fa-cart-plus text-lg text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--Fim Bebidas Menu-->
+            <!--Bebidas Menu-->
+
+            <div class="flex gap-2 w-full bg-gray-200 p-6 rounded-xl shadow-lg">
+                <img src="assets/refri-2.png" alt="hamburguer-duplo"
+                    class="w-28 h-28 rounded-md hover:scale-105 hover:-rotate-2 duration-300 shadow-lg">
+
+                <div class="w-full">
+                    <p class="font-bold">Guaraná 350ml</p>
+
+                    <div class="flex items-center justify-between gap-2 mt-3">
+                        <p class="font-bold">R$ 5,90</p>
+                        <button class="bg-gray-900 py-2 px-3 rounded " id="add-to-btn" data-name="Guaraná 350ml"
+                            data-price="5.90">
+                            <i class="fa fa-cart-plus text-lg text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--Bebidas Menu-->
+        </main>
+    </div>
+    <!--começo do modal-->
+    <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-50  items-center justify-center hidden" id="card-modal">
+        <div class="bg-gray-200 rounded-xl p-5 min-w-[90%] md:min-w-[600px]">
+
+            <h2 class="text-center text-3xl font-bold mb-4">Meu Carrinho</h2>
+
+            <div id="cart-items" class="flex justify-between mb-2 flex-col"></div>
+            <!--A onde vai rederizar os itens do pedido-->
+            <p class="font-bold text-2xl">Total: <span id="cart-total">R$ 0.00</span></p>
+
+            <p class="font-bold mt-4">Endereço de entrega</p>
+
+            <input type="text" placeholder="Digite seu Endereço Completo..." id="address"
+                class="w-full border-2 border-gray-300 p-1 rounded my-1 shadow-lg ">
+
+            <p class="text-red-500 hidden" id="address-warnig">Digite seu endereço completo para continuar!</p>
+
+            <div class="w-full flex justify-between mt-3 gap-1">
+                <button id="close-modal-btn"
+                    class="bg-slate-900 hover:bg-slate-700 py-1 px-2 rounded font-bold text-white">Fechar</button>
+                <button id="checkout-btn" class="bg-green-500 hover:bg-green-600 py-1 px-2 rounded font-bold">Finalizar
+                    pedido</button>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <!--Fim do modal-->
+    <footer class="fixed bottom-0 bg-red-600 w-full p-2 text-center z-40 flex justify-center items-center">
+        <button id="card-btn" class="text-white hover:text-gray-400 font-bold text-lg  gap-1">
+            (<span id="cart-count">0</span>)
+            Veja meu Carrinho<i class="fa fa-cart-plus"></i>
+        </button>
+    </footer>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

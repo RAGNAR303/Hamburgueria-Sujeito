@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="w-full">
           <p class="font-bold">${item.name}</p>
           <div class="flex items-center justify-between gap-2 mt-3">
-            <p class="font-bold">R$ ${item.price.replace(".", ",")}</p>
-            <button class="bg-gray-900 py-2 px-3 rounded add-to-btn" data-name="${
+            <p class="font-bold text-2xl">R$ ${item.price.replace(".", ",")}</p>
+            <button class="bg-gray-900  hover:bg-slate-700  py-2 px-3 rounded add-to-btn hover:scale-105 transition-all duration-400" data-name="${
               item.name
             }" data-price="${item.price}">
               <i class="fa fa-cart-plus text-lg text-white"></i>

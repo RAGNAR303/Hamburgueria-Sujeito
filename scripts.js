@@ -1,62 +1,52 @@
 const menu = document.getElementById("menu");
-const cartBtn = document.getElementById("add-to-btn");
 const cartModal = document.getElementById("card-modal");
 const exitModal = document.getElementById("close-modal-btn");
-const checkoutbtn = document.getElementById("checkout-btn");
-const cardBtn = document.getElementById("card-btn");
+const checkoutBtn = document.getElementById("checkout-btn");
+const cartBtn = document.getElementById("card-btn");
 const cartCount = document.getElementById("cart-count");
 const cartItemsContainer = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
-const andressInput = document.getElementById("address");
-const andressWarn = document.getElementById("address-warnig");
-
-// Abrir modal
+const addressInput = document.getElementById("address");
+const addressWarn = document.getElementById("address-warning");
 
 let cart = [];
 
-cardBtn.addEventListener("click", function () {
+// Abrir modal
+cartBtn.addEventListener("click", function () {
   updateCartModal();
   cartModal.style.display = "flex";
 });
 
-// Fechar modal Clicando fora ou no Botao "fechar"
+// Fechar modal clicando fora ou no botão "fechar"
 cartModal.addEventListener("click", function (event) {
   if (event.target === cartModal || event.target === exitModal) {
     cartModal.style.display = "none";
   }
 });
 
-// pegando "event" dentro da DOM com o ID "menu" mais pegando um ID especifico
+// Delegação de eventos para botões .add-to-btn
 menu.addEventListener("click", function (event) {
-  // console.log(event.target);
-
-  let parentBtn = event.target.closest("#add-to-btn");
-
-  if (parentBtn) {
-    // Pegando o atributo que esta dentro da button usando a ID
-    const name = parentBtn.getAttribute("data-name");
-    const price = parseFloat(parentBtn.getAttribute("data-price"));
-    // const img = parentBtn.getAttribute("data-img");
-    // Mandado para função os parametros para colocar no carrinho
-
+  const button = event.target.closest(".add-to-btn");
+  if (button) {
+    const name = button.getAttribute("data-name");
+    const price = parseFloat(button.getAttribute("data-price"));
     addToCart(name, price);
   }
 });
 
-// Funçao de adcionar produto no carrinho
+// Função para adicionar produto ao carrinho
 function addToCart(name, price) {
   const existingItem = cart.find((item) => item.name === name);
 
   if (existingItem) {
-    // se o item já existe, aumenta apenas a quantidade + 1
     existingItem.qtd += 1;
     Toastify({
-      text: `${existingItem.name} foi adicinado`,
+      text: `${existingItem.name} quantidade foi para (${existingItem.qtd})`,
       duration: 3000,
       close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
       style: {
         background: "#37e32e",
       },
@@ -67,15 +57,13 @@ function addToCart(name, price) {
       price,
       qtd: 1,
     });
-
-    
     Toastify({
-      text: `Quantidade atualizada : ${existingItem.name} para: ${existingItem.qtd} `,
+      text: `${name} foi adicionado`,
       duration: 3000,
       close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
       style: {
         background: "#3f0bea",
       },
@@ -85,14 +73,12 @@ function addToCart(name, price) {
   updateCartModal();
 }
 
+// Função para atualizar o modal do carrinho
 function updateCartModal() {
   cartItemsContainer.innerHTML = "";
   let total = 0;
 
-  // "forEach" percorre o array
-
   cart.forEach((item) => {
-    // criando uma "div" com nome  "cartItemElement"
     const cartItemElement = document.createElement("div");
     cartItemElement.classList.add(
       "flex",
@@ -101,48 +87,43 @@ function updateCartModal() {
       "flex-col"
     );
 
-    // Renderiza as a div na dom
     cartItemElement.innerHTML = `
-   <div class="flex justify-between bg-white p-1 px-2 shadow-lg mt-1 rounded">
-    <div class="flex flex-col gap-1">
-        <p class="font-bold"> ${item.name}</p>
-        <p >Qtd: ${item.qtd}</p>
-        <p class="font-bold">R$ ${item.price.toFixed(2)}</p>
-    </div>
-    <div class="flex items-center">
-    <button class="bg-slate-900 py-1 px-2 rounded font-bold text-white cartRemoveBtn" 
-    data-name="${item.name}">
-        Remover
-    </button>
-    </div>
-   </div>
-`;
-    // Multiplicando o quantidade com preço
+      <div class="flex justify-between bg-white p-1 px-2 shadow-lg mt-1 rounded">
+        <div class="flex flex-col gap-1">
+          <p class="font-bold">${item.name}</p>
+          <p>Qtd: ${item.qtd}</p>
+          <p class="font-bold">R$ ${item.price.toFixed(2).replace(".", ",")}</p>
+        </div>
+        <div class="flex items-center">
+          <button class="bg-slate-900 py-1 px-2 rounded font-bold text-white cartRemoveBtn" data-name="${
+            item.name
+          }">
+            Remover
+          </button>
+        </div>
+      </div>
+    `;
+
     total += item.price * item.qtd;
-    // Renderiza o informações do pedido no modal de carrinho
     cartItemsContainer.appendChild(cartItemElement);
   });
-  // Coloca a resultado do total e formatar como moeda no moda de carrinho
+
   cartTotal.innerHTML = total.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });
-  // Acessa o tamanho do Array e coloca como contador de Qtd de produtos
   cartCount.innerHTML = cart.length;
 }
 
 // Remover item do carrinho
-
 cartItemsContainer.addEventListener("click", function (event) {
   if (event.target.classList.contains("cartRemoveBtn")) {
     const name = event.target.getAttribute("data-name");
-
     removeItemCart(name);
   }
 });
 
 function removeItemCart(name) {
-  // Verifica se o item tem no cart e manda a posição em uma variável
   const index = cart.findIndex((item) => item.name === name);
 
   if (index !== -1) {
@@ -151,12 +132,12 @@ function removeItemCart(name) {
       item.qtd -= 1;
       updateCartModal();
       Toastify({
-        text: "Quantidade reduzida!",
+        text: `${item.name} Quantidade reduzida!`,
         duration: 3000,
         close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
         style: {
           background: "#1d1313",
         },
@@ -165,12 +146,12 @@ function removeItemCart(name) {
       cart.splice(index, 1);
       updateCartModal();
       Toastify({
-        text: "Item Excluido com sucesso!",
+        text: `${item.name} excluído com sucesso!`,
         duration: 3000,
         close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
         style: {
           background: "#f3214e",
         },
@@ -179,29 +160,28 @@ function removeItemCart(name) {
   }
 }
 
-// Verifando se esta vazio o input
-
-andressInput.addEventListener("input", function (event) {
+// Verificar se o input de endereço está vazio
+addressInput.addEventListener("input", function (event) {
   let inputValue = event.target.value;
 
   if (inputValue !== "") {
-    andressWarn.classList.add("hidden");
-    andressInput.classList.remove("border-red-500");
+    addressWarn.classList.add("hidden");
+    addressInput.classList.remove("border-red-500");
   }
 });
 
-// Verificado se tem item no carrinho ou se o input de endereço esta ou nao vazio para colocar um mensagem
-checkoutbtn.addEventListener("click", function () {
+// Verificar se tem item no carrinho e se o endereço está preenchido
+checkoutBtn.addEventListener("click", function () {
   const isOpen = checkRestaurantOpen();
 
   if (!isOpen) {
     Toastify({
-      text: "Estamos Fechado no momento!",
+      text: "Estamos fechados no momento!",
       duration: 3000,
       close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
       style: {
         background: "linear-gradient(to right, #ef4403, #ef4444)",
       },
@@ -210,25 +190,25 @@ checkoutbtn.addEventListener("click", function () {
   }
 
   if (cart.length === 0) return;
-  if (andressInput.value === "") {
-    andressWarn.classList.remove("hidden");
-    andressInput.classList.add("border-red-500");
+  if (addressInput.value === "") {
+    addressWarn.classList.remove("hidden");
+    addressInput.classList.add("border-red-500");
     return;
   }
 
   const cartItems = cart
     .map((item) => {
-      return `${item.name}, Quantidade: (${item.qtd}) , Preço: R$${item.price} |`;
+      return `${item.name}, Quantidade: (${item.qtd}), Preço: R$${item.price
+        .toFixed(2)
+        .replace(".", ",")} |`;
     })
     .join("");
-
-  console.log(cartItems);
 
   const message = encodeURIComponent(cartItems);
   const phone = "5511965668190";
 
   window.open(
-    `https://wa.me/${phone}?text=${message} Endereço: ${andressInput.value}`,
+    `https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`,
     "_blank"
   );
 
@@ -236,15 +216,11 @@ checkoutbtn.addEventListener("click", function () {
   updateCartModal();
 });
 
-// indentifica se o Horário de funcinamento
+// Verificar horário de funcionamento
 function checkRestaurantOpen() {
-  // pegando dia atual
   const data = new Date();
-
-  // tira  a hora de "data"  atual
   const hora = data.getHours();
-  //  retorna bolean = true ou false
-  return hora >= 18 && hora < 22;
+  return hora >= 14 && hora < 22;
 }
 
 const spanAberto = document.getElementById("date-aberto");

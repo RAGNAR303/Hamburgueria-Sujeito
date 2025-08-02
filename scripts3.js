@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cartItemElement.classList.add("bebidas-card");
 
     cartItemElement.innerHTML = `
-      <div class="flex gap-2 w-full bg-gray-200 p-6 rounded-xl shadow-lg ">
+      <div class="flex gap-2 w-full bg-gray-200 p-6 rounded-xl shadow-lg bg-cover bg-center ">
         <img src="${item.img}" alt="${
       item.name
     }" class="w-28 h-28 rounded-md hover:scale-105 hover:-rotate-2 duration-300 shadow-lg">
